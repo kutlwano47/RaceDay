@@ -12,9 +12,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: List repository files
+      - name: Validate project structure
         run: |
-          echo "Current directory:"
-          pwd
-          echo "Files in repository:"
-          find . -type f | sort
+          test -d docs
+          test -f docs/RaceDay_ERD.png
+          test -f docs/API_Endpoint_Plan.pdf
+          test -f docs/RaceDay_Database.sql
+          echo "RaceDay Part 1 structure is valid."
