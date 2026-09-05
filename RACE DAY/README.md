@@ -77,7 +77,7 @@ The workflow is located at:
 
 `.github/workflows/validate.yml`
 
-A successful workflow run is indicated by a green check mark in GitHub Actions.
+
 
 ## Project Structure
 
