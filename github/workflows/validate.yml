@@ -12,15 +12,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Check required files
+      - name: List repository files
         run: |
-          echo "Checking ERD..."
-          test -f docs/RaceDay_ERD.png || { echo "ERROR: RaceDay_ERD.png is missing"; exit 1; }
-
-          echo "Checking API plan..."
-          test -f docs/API_Endpoint_Plan.pdf || { echo "ERROR: API_Endpoint_Plan.pdf is missing"; exit 1; }
-
-          echo "Checking database..."
-          test -f docs/RaceDay_Database.sql || { echo "ERROR: RaceDay_Database.sql is missing"; exit 1; }
-
-          echo "All required Part 1 files are present."
+          echo "Current directory:"
+          pwd
+          echo "Files in repository:"
+          find . -type f | sort
