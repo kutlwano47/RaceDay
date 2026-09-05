@@ -14,8 +14,13 @@ jobs:
 
       - name: Check required files
         run: |
-          test -f docs/RaceDay_ERD.png
-          test -f docs/API_Endpoint_Plan.pdf
-          test -f docs/RaceDay_Database.sql
+          echo "Checking ERD..."
+          test -f docs/RaceDay_ERD.png || { echo "ERROR: RaceDay_ERD.png is missing"; exit 1; }
+
+          echo "Checking API plan..."
+          test -f docs/API_Endpoint_Plan.pdf || { echo "ERROR: API_Endpoint_Plan.pdf is missing"; exit 1; }
+
+          echo "Checking database..."
+          test -f docs/RaceDay_Database.sql || { echo "ERROR: RaceDay_Database.sql is missing"; exit 1; }
+
           echo "All required Part 1 files are present."
-          
