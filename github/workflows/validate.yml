@@ -1,0 +1,18 @@
+name: Validate RaceDay Project
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+           - name: Show repository files
+        run: |
+          echo "Repository files:"
+          find . -maxdepth 3 -type f | sort
