@@ -104,7 +104,7 @@ Part 1 includes the system planning, API endpoint planning and SQL database desi
 
 YouTube walkthrough:
 
-**[Add your unlisted YouTube video link here]**
+**[https://youtu.be/rHG9ERxRcUQ]**
 
 ## AI Disclosure
 
