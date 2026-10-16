@@ -1,9 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
+	  <NoWarn>$(NoWarn);NU1902;NU1903</NoWarn>
+<TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>0b99e325-112a-47eb-b292-42c0a9a7e50c</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,7 +20,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="System.Security.Cryptography.Pkcs" Version="9.0.11" />
+    <PackageReference Include="System.Security.Cryptography.Pkcs" Version="9.0.12" />
   </ItemGroup>
 
 </Project>
