@@ -1,0 +1,13 @@
+@RaceDayAPI_HostAddress = https://localhost:7181
+
+POST {{RaceDayAPI_HostAddress}}/api/Auth/register
+Content-Type: application/json
+
+{
+  "firstName": "Test",
+  "lastName": "User",
+  "email": "test@raceday.com",
+  "password": "Test123!",
+  "role": "User",
+  "phoneNumber": "0123456789"
+}
