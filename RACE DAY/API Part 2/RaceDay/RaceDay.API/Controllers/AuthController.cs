@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using RaceDay.API.Data;
@@ -56,6 +57,48 @@ public class AuthController : ControllerBase
         return Ok(new { token, user.UserID, user.Email, user.Role });
     }
 
+    // NEW - Profile View
+    [HttpGet("me")]
+    [Authorize]
+    public async Task<IActionResult> GetProfile()
+    {
+        var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (userIdClaim == null) return Unauthorized();
+
+        var user = await _context.Users.FindAsync(int.Parse(userIdClaim));
+        if (user == null) return NotFound();
+
+        return Ok(new
+        {
+            user.UserID,
+            user.FirstName,
+            user.LastName,
+            user.Email,
+            user.Role,
+            user.PhoneNumber,
+            user.DateCreated
+        });
+    }
+
+    // NEW - Profile Update
+    [HttpPut("me")]
+    [Authorize]
+    public async Task<IActionResult> UpdateProfile(UpdateProfileDto dto)
+    {
+        var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (userIdClaim == null) return Unauthorized();
+
+        var user = await _context.Users.FindAsync(int.Parse(userIdClaim));
+        if (user == null) return NotFound();
+
+        if (!string.IsNullOrWhiteSpace(dto.FirstName)) user.FirstName = dto.FirstName;
+        if (!string.IsNullOrWhiteSpace(dto.LastName)) user.LastName = dto.LastName;
+        if (!string.IsNullOrWhiteSpace(dto.PhoneNumber)) user.PhoneNumber = dto.PhoneNumber;
+
+        await _context.SaveChangesAsync();
+        return Ok(new { user.UserID, user.FirstName, user.LastName, user.Email, user.Role });
+    }
+
     private string GenerateToken(User user)
     {
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]!));
@@ -77,4 +120,11 @@ public class AuthController : ControllerBase
 
         return new JwtSecurityTokenHandler().WriteToken(token);
     }
+}
+
+public class UpdateProfileDto
+{
+    public string? FirstName { get; set; }
+    public string? LastName { get; set; }
+    public string? PhoneNumber { get; set; }
 }

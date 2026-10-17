@@ -67,41 +67,460 @@
         }
       }
     },
-    "/WeatherForecast": {
+    "/api/Auth/me": {
       "get": {
         "tags": [
-          "WeatherForecast"
+          "Auth"
         ],
-        "operationId": "GetWeatherForecast",
         "responses": {
           "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/WeatherForecast"
-                  }
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/WeatherForecast"
-                  }
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/WeatherForecast"
-                  }
-                }
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateProfileDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateProfileDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateProfileDto"
               }
             }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Categories": {
+      "get": {
+        "tags": [
+          "Categories"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Categories"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Category"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Category"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Category"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Categories/event/{eventId}": {
+      "get": {
+        "tags": [
+          "Categories"
+        ],
+        "parameters": [
+          {
+            "name": "eventId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Categories/{id}": {
+      "delete": {
+        "tags": [
+          "Categories"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Enrolments": {
+      "get": {
+        "tags": [
+          "Enrolments"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Enrolments"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Enrolment"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Enrolment"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Enrolment"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Enrolments/{id}": {
+      "get": {
+        "tags": [
+          "Enrolments"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/EventRoutes/event/{eventId}": {
+      "get": {
+        "tags": [
+          "EventRoutes"
+        ],
+        "parameters": [
+          {
+            "name": "eventId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/EventRoutes": {
+      "post": {
+        "tags": [
+          "EventRoutes"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EventRoute"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EventRoute"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EventRoute"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/EventRoutes/{id}": {
+      "delete": {
+        "tags": [
+          "EventRoutes"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Events": {
+      "get": {
+        "tags": [
+          "Events"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Events"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Event"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Event"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Event"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Events/{id}": {
+      "get": {
+        "tags": [
+          "Events"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Events"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Event"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Event"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Event"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Events"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Results": {
+      "get": {
+        "tags": [
+          "Results"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Results"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Result"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Result"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Result"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Results/enrolment/{enrolmentId}": {
+      "get": {
+        "tags": [
+          "Results"
+        ],
+        "parameters": [
+          {
+            "name": "enrolmentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
@@ -109,6 +528,233 @@
   },
   "components": {
     "schemas": {
+      "Category": {
+        "required": [
+          "categoryName",
+          "categoryType"
+        ],
+        "type": "object",
+        "properties": {
+          "categoryID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "eventID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "categoryName": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string"
+          },
+          "categoryType": {
+            "maxLength": 20,
+            "minLength": 1,
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "maxParticipants": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fee": {
+            "type": "number",
+            "format": "double"
+          },
+          "event": {
+            "$ref": "#/components/schemas/Event"
+          },
+          "enrolments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Enrolment"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Enrolment": {
+        "required": [
+          "paymentStatus",
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "enrolmentID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "participantID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "eventID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "categoryID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "enrolmentDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "maxLength": 20,
+            "minLength": 1,
+            "type": "string"
+          },
+          "paymentStatus": {
+            "maxLength": 20,
+            "minLength": 1,
+            "type": "string"
+          },
+          "paymentAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true
+          },
+          "participant": {
+            "$ref": "#/components/schemas/User"
+          },
+          "event": {
+            "$ref": "#/components/schemas/Event"
+          },
+          "category": {
+            "$ref": "#/components/schemas/Category"
+          },
+          "result": {
+            "$ref": "#/components/schemas/Result"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Event": {
+        "required": [
+          "eventName",
+          "eventType",
+          "location"
+        ],
+        "type": "object",
+        "properties": {
+          "eventID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "organiserID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "eventName": {
+            "maxLength": 150,
+            "minLength": 1,
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "eventDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "location": {
+            "maxLength": 150,
+            "minLength": 1,
+            "type": "string"
+          },
+          "distanceKM": {
+            "type": "number",
+            "format": "double"
+          },
+          "eventType": {
+            "maxLength": 10,
+            "minLength": 1,
+            "type": "string"
+          },
+          "dateCreated": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "organiser": {
+            "$ref": "#/components/schemas/User"
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Category"
+            },
+            "nullable": true
+          },
+          "enrolments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Enrolment"
+            },
+            "nullable": true
+          },
+          "routes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EventRoute"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EventRoute": {
+        "required": [
+          "routeName"
+        ],
+        "type": "object",
+        "properties": {
+          "routeID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "eventID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "routeName": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string"
+          },
+          "routeDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "distanceKM": {
+            "type": "number",
+            "format": "double"
+          },
+          "elevationGain": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "mapURL": {
+            "maxLength": 255,
+            "type": "string",
+            "nullable": true
+          },
+          "event": {
+            "$ref": "#/components/schemas/Event"
+          }
+        },
+        "additionalProperties": false
+      },
       "LoginRequest": {
         "type": "object",
         "properties": {
@@ -153,25 +799,111 @@
         },
         "additionalProperties": false
       },
-      "WeatherForecast": {
+      "Result": {
         "type": "object",
         "properties": {
-          "date": {
-            "type": "string",
-            "format": "date"
-          },
-          "temperatureC": {
+          "resultID": {
             "type": "integer",
             "format": "int32"
           },
-          "temperatureF": {
+          "enrolmentID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "position": {
             "type": "integer",
             "format": "int32",
-            "readOnly": true
+            "nullable": true
           },
-          "summary": {
+          "finishTime": {
+            "type": "string",
+            "format": "date-span",
+            "nullable": true
+          },
+          "score": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "remarks": {
             "type": "string",
             "nullable": true
+          },
+          "dateRecorded": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "enrolment": {
+            "$ref": "#/components/schemas/Enrolment"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateProfileDto": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "phoneNumber": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "User": {
+        "required": [
+          "email",
+          "firstName",
+          "lastName",
+          "passwordHash",
+          "role"
+        ],
+        "type": "object",
+        "properties": {
+          "userID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "firstName": {
+            "maxLength": 50,
+            "minLength": 1,
+            "type": "string"
+          },
+          "lastName": {
+            "maxLength": 50,
+            "minLength": 1,
+            "type": "string"
+          },
+          "email": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string"
+          },
+          "passwordHash": {
+            "maxLength": 255,
+            "minLength": 1,
+            "type": "string"
+          },
+          "role": {
+            "maxLength": 20,
+            "minLength": 1,
+            "type": "string"
+          },
+          "phoneNumber": {
+            "maxLength": 20,
+            "type": "string",
+            "nullable": true
+          },
+          "dateCreated": {
+            "type": "string",
+            "format": "date-time"
           }
         },
         "additionalProperties": false
@@ -183,7 +915,19 @@
       "name": "Auth"
     },
     {
-      "name": "WeatherForecast"
+      "name": "Categories"
+    },
+    {
+      "name": "Enrolments"
+    },
+    {
+      "name": "EventRoutes"
+    },
+    {
+      "name": "Events"
+    },
+    {
+      "name": "Results"
     }
   ]
 }
