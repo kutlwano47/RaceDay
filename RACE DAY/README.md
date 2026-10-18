@@ -180,4 +180,4 @@ RaceDay/
 Part 2 complete. Profile endpoint implemented, unit tests created and passing 3/3, solution builds with 2 of 2 projects, all changes pushed to GitHub.
 
 ### Video Demonstration - Part 2
-*[Add your Part 2 YouTube link here]*
+https://youtu.be/f3HCoxvfVmI
