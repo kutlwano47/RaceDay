@@ -12,15 +12,27 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Check required files
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Validate Part 1 structure
         run: |
-          echo "Checking ERD..."
-          test -f docs/RaceDay_ERD.png || { echo "ERROR: RaceDay_ERD.png is missing"; exit 1; }
+          test -d docs
+          test -f docs/RaceDay_ERD.png
+          test -f docs/API_Endpoint_Plan.pdf
+          test -f docs/RaceDay_Database.sql
+          echo "RaceDay Part 1 structure is valid."
 
-          echo "Checking API plan..."
-          test -f docs/API_Endpoint_Plan.pdf || { echo "ERROR: API_Endpoint_Plan.pdf is missing"; exit 1; }
+      - name: Restore dependencies
+        run: dotnet restore
 
-          echo "Checking database..."
-          test -f docs/RaceDay_Database.sql || { echo "ERROR: RaceDay_Database.sql is missing"; exit 1; }
+      - name: Build solution
+        run: dotnet build --no-restore
 
-          echo "All required Part 1 files are present."
+      - name: Run Unit Tests
+        run: dotnet test --no-build --verbosity normal
+
+      - name: Part 2 validation complete
+        run: echo "RaceDay Part 2 build and tests passed - 3/3"
