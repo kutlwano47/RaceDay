@@ -1,0 +1,62 @@
+﻿@model RaceDay.MVC.Models.LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+}
+<style>
+    .auth-wrap {
+        min-height: 90vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: radial-gradient(800px 400px at 20% 0%, #1a2450 0%, #070b18 60%)
+    }
+
+    .auth-card {
+        background: rgba(17,22,42,0.9);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 24px;
+        padding: 36px;
+        width: 100%;
+        max-width: 440px;
+        backdrop-filter: blur(20px)
+    }
+
+        .auth-card h2 {
+            font-family: 'Bebas Neue';
+            font-size: 42px;
+            letter-spacing: 1px
+        }
+
+    .auth-input {
+        background: #0d1226 !important;
+        border: 1px solid rgba(255,255,255,0.12) !important;
+        color: white !important;
+        border-radius: 12px;
+        padding: 12px 16px
+    }
+
+        .auth-input:focus {
+            border-color: #d6ff00 !important;
+            box-shadow: 0 0 0 3px rgba(214,255,0,0.2) !important
+        }
+</style>
+<div class="auth-wrap">
+    <div class="auth-card">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="m-0">LOG <span style="color:var(--lime)">IN</span></h2>
+            <span class="pill">RACEDAY</span>
+        </div>
+        @if (ViewBag.Error != null)
+        {
+            <div class="alert alert-danger" style="border-radius:12px">@ViewBag.Error</div>
+        }
+        <form asp-action="Login" method="post">
+            <label class="small text-white-50 mb-1">Email</label>
+            <input asp-for="Email" class="form-control auth-input mb-3" placeholder="you@raceday.co.za" />
+            <label class="small text-white-50 mb-1">Password</label>
+            <input asp-for="Password" type="password" class="form-control auth-input mb-4" placeholder="••••••••" />
+            <button type="submit" class="btn-blaze w-100" style="padding:14px;border-radius:12px">Login →</button>
+            <div class="text-center mt-3 small text-white-50">No account? <a asp-action="Register" style="color:var(--lime);text-decoration:none;font-weight:700">Register</a></div>
+        </form>
+    </div>
+</div>

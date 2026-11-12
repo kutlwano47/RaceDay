@@ -1,0 +1,62 @@
+﻿@model RaceDay.MVC.Models.EventViewModel
+@{
+ ViewData["Title"]="Create Event";
+}
+<div style="background:#0a0a0a; min-height:100vh; padding:2rem;">
+  <div class="container" style="max-width:700px;">
+    <h1 style="color:white; font-weight:900; margin-bottom:1rem;">CREATE EVENT</h1>
+
+    @if(!ViewData.ModelState.IsValid)
+    {
+      <div style="background:#3a0000; border:1px solid #ff3333; border-radius:12px; padding:1rem; color:#ff9999; margin-bottom:1rem;">
+        <strong style="color:white;">Error:</strong>
+        @foreach(var e in ViewData.ModelState.Values.SelectMany(v=>v.Errors))
+        {
+          <div style="margin-top:0.5rem;">@e.ErrorMessage</div>
+        }
+      </div>
+    }
+
+    <form asp-action="Create" method="post" enctype="multipart/form-data" style="background:#111; border:1px solid #222; border-radius:16px; padding:2rem;">
+      <div class="mb-3">
+        <label style="color:#aaa;">Event Name</label>
+        <input asp-for="Name" class="form-control" style="background:#000;color:white;border:1px solid #333;" required />
+      </div>
+      <div class="mb-3">
+        <label style="color:#aaa;">Description</label>
+        <textarea asp-for="Description" class="form-control" style="background:#000;color:white;border:1px solid #333;" rows="3"></textarea>
+      </div>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label style="color:#aaa;">Date</label>
+          <input asp-for="Date" type="date" class="form-control" style="background:#000;color:white;border:1px solid #333;" required />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label style="color:#aaa;">Location</label>
+          <input asp-for="Location" class="form-control" style="background:#000;color:white;border:1px solid #333;" required />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label style="color:#aaa;">Distance (KM)</label>
+          <input asp-for="Distance" type="number" step="0.1" class="form-control" style="background:#000;color:white;border:1px solid #333;" required />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label style="color:#aaa;">Event Type</label>
+          <select asp-for="EventType" class="form-control" style="background:#000;color:white;border:1px solid #333;">
+            <option>Road Running</option>
+            <option>Trail</option>
+            <option>Walking</option>
+            <option>Cycling</option>
+          </select>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label style="color:#aaa;">Banner Image (optional)</label>
+        <input type="file" name="banner" class="form-control" style="background:#000;color:white;border:1px solid #333;" />
+      </div>
+      <button type="submit" style="background:#FF5A1F;color:black;font-weight:900;border:none;border-radius:10px;padding:0.8rem 2rem;width:100%;">CREATE RACE →</button>
+      <a href="/Organiser/Dashboard" style="color:#666;display:block;text-align:center;margin-top:1rem; text-decoration:none;">Cancel</a>
+    </form>
+  </div>
+</div>
