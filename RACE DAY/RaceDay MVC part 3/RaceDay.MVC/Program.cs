@@ -13,7 +13,7 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
-// ADD AUTHENTICATION - THIS WAS MISSING!
+// AUTHENTICATION - you fixed this, keep it
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
@@ -22,11 +22,14 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
     });
 
-// API HttpClient - your port is 7181
+// API HttpClient - your port is 7181 - GOOD
 builder.Services.AddHttpClient("RaceDayAPI", client =>
 {
     client.BaseAddress = new Uri("https://localhost:7181");
 });
+
+// ALSO add generic HttpClient for EventsController that uses Factory
+builder.Services.AddHttpClient();
 
 // Our ApiService
 builder.Services.AddScoped<RaceDay.MVC.Services.ApiService>();
@@ -44,7 +47,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseSession();
-app.UseAuthentication(); // MISSING BEFORE!
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
