@@ -27,7 +27,7 @@
                   <p style="color:#888; font-size:0.9rem;">@ev.Location • @ev.Date.ToString("dd MMM yyyy") • @ev.Distance KM</p>
                   <div class="d-flex gap-2">
                     <a href="/Organiser/Enrolments?eventId=@ev.Id" class="btn btn-sm" style="background:#C6FF00; color:black;">Enrolments</a>
-                    <form asp-action="Delete" method="post" style="display:inline;"><input type="hidden" name="id" value="@ev.Id"/><button class="btn btn-sm btn-outline-danger">Delete</button></form>
+                    <form asp-action="Delete" method="post" style="display:inline;"><input type="hidden" name="id" value="@ev.Id"/><button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Delete this event?');">Delete</button></form>
                   </div>
                 </div>
               </div>

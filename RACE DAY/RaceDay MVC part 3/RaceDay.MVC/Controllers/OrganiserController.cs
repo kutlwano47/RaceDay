@@ -101,7 +101,7 @@ namespace RaceDay.MVC.Controllers
         {
             var token = GetToken();
             await _api.DeleteAsync($"/api/Events/{id}", token);
-            return RedirectToAction("Events");
+            return RedirectToAction("Dashboard");
         }
     }
 }
