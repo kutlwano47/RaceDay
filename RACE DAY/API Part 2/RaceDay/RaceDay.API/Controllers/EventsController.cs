@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RaceDay.API.Data;
 using RaceDay.API.Models;
+using System.Security.Claims;
 
 namespace RaceDay.API.Controllers;
 
@@ -24,17 +25,38 @@ public class EventsController : ControllerBase
         return Ok(ev);
     }
 
-    [Authorize(Roles = "Admin,Organiser")]
+    [Authorize(Roles = "Admin,Organiser,Organizer")]
     [HttpPost]
     public async Task<IActionResult> Create(Event model)
     {
         model.DateCreated = DateTime.Now;
+
+        // GET REAL USER FROM DB USING EMAIL IN TOKEN
+        var email = User.FindFirst(ClaimTypes.Email)?.Value
+                 ?? User.FindFirst("email")?.Value
+                 ?? User.Identity?.Name;
+
+        if (email != null)
+        {
+            var realUser = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+            if (realUser != null)
+                model.OrganiserID = realUser.UserID;
+        }
+
+        // Fallback — if still 0, get first organiser in DB
+        if (model.OrganiserID == 0)
+        {
+            var firstOrg = await _context.Users.FirstOrDefaultAsync(u =>
+                u.Role == "Organiser" || u.Role == "Organizer");
+            if (firstOrg != null) model.OrganiserID = firstOrg.UserID;
+        }
+
         _context.Events.Add(model);
         await _context.SaveChangesAsync();
         return CreatedAtAction(nameof(GetById), new { id = model.EventID }, model);
     }
 
-    [Authorize(Roles = "Admin,Organiser")]
+    [Authorize(Roles = "Admin,Organiser,Organizer")]
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(int id, Event model)
     {

@@ -49,10 +49,11 @@ namespace RaceDay.MVC.Controllers
                 EventName = model.Name,
                 Description = model.Description ?? "10KM fun run in Polokwane",
                 Location = model.Location ?? "Polokwane",
-                Date = model.Date.ToUniversalTime(),
-                Distance = model.Distance,
-                EventType = model.EventType == "Road Running" ? "Road" : model.EventType,
-                BannerUrl = "https://via.placeholder.com/600x300?text=" + Uri.EscapeDataString(model.Name ?? "Race")
+                EventDate = model.Date.ToUniversalTime(),
+                DistanceKM = model.Distance,
+                EventType = string.IsNullOrWhiteSpace(model.EventType)
+                    ? "Road"
+                    : model.EventType == "Road Running" ? "Road" : model.EventType
             };
 
             var (success, content) = await _api.PostAsync("/api/Events", payload, token);

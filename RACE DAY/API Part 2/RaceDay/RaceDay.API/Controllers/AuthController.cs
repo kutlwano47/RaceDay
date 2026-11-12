@@ -30,13 +30,17 @@ public class AuthController : ControllerBase
         if (await _context.Users.AnyAsync(u => u.Email == req.Email))
             return BadRequest("Email already exists");
 
+        var role = string.Equals(req.Role, "Organizer", StringComparison.OrdinalIgnoreCase)
+            ? "Organiser"
+            : req.Role;
+
         var user = new User
         {
             FirstName = req.FirstName,
             LastName = req.LastName,
             Email = req.Email,
             PasswordHash = BCrypt.Net.BCrypt.HashPassword(req.Password),
-            Role = req.Role,
+            Role = role,
             PhoneNumber = req.PhoneNumber,
             DateCreated = DateTime.Now
         };

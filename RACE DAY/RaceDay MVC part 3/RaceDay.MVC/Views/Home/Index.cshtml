@@ -11,7 +11,41 @@
     .stat-card { background: rgba(255,255,255,0.08); backdrop-filter: blur(10px); border-radius: 12px; padding: 15px 20px; border: 1px solid rgba(255,255,255,0.1); }
     .race-card { background: #15151c; border: 1px solid #222; border-radius: 16px; color: white; transition:0.3s; }
     .race-card:hover { border-color: #ff5a30; transform: translateY(-4px); }
+    .event-toast {
+        position: fixed;
+        top: 24px;
+        right: 24px;
+        z-index: 1050;
+        min-width: 300px;
+        background: #d4ff00;
+        color: #0a0a0f;
+        border-radius: 14px;
+        padding: 16px 20px;
+        box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+        font-weight: 700;
+        transition: opacity 0.35s ease-out, transform 0.35s ease-out;
+    }
+    .event-toast button {
+        float: right;
+        border: 0;
+        background: transparent;
+        color: inherit;
+        font-size: 20px;
+        line-height: 1;
+        margin-left: 16px;
+    }
 </style>
+
+@if (TempData["Success"] is string successMessage)
+{
+    <div id="eventCreatedToast" class="event-toast" role="status">
+        <button type="button" aria-label="Close" onclick="this.parentElement.remove()">&times;</button>
+        <span>✓ @successMessage</span>
+    </div>
+    <script>
+        setTimeout(() => document.getElementById('eventCreatedToast')?.remove(), 5000);
+    </script>
+}
 
 <!-- HERO - YOUR COOL MENU BACK -->
 <div style="padding: 60px 40px 30px 60px; position:relative;">
