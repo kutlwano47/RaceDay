@@ -1,0 +1,2 @@
+wwwroot\upload.html
+C:\Users\Student\source\repos\RaceDay\RaceDay.API\wwwroot\upload.html

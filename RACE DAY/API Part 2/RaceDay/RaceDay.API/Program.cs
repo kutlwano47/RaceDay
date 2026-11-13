@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using RaceDay.API.Data;
+using RaceDay.API.Services;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,7 @@ builder.Services.AddDbContext<RaceDayDbContext>(options =>
 
 // 2. Controllers
 builder.Services.AddControllers();
+builder.Services.AddSingleton<BlobService>();
 
 // 3. JWT Authentication
 var jwtKey = builder.Configuration["Jwt:Key"];

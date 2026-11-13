@@ -182,3 +182,5 @@ C:\Users\Student\source\repos\RaceDay\RaceDay.API\bin\Debug\net10.0\Apache.Arrow
 C:\Users\Student\source\repos\RaceDay\RaceDay.API\bin\Debug\net10.0\Azure.Storage.Blobs.dll
 C:\Users\Student\source\repos\RaceDay\RaceDay.API\bin\Debug\net10.0\Azure.Storage.Common.dll
 C:\Users\Student\source\repos\RaceDay\RaceDay.API\bin\Debug\net10.0\System.IO.Hashing.dll
+C:\Users\Student\source\repos\RaceDay\RaceDay.API\bin\Debug\net10.0\RaceDay.API.staticwebassets.runtime.json
+C:\Users\Student\source\repos\RaceDay\RaceDay.API\obj\Debug\net10.0\compressed\x8ok2eqwo1-{0}-8rez8ah3q2-8rez8ah3q2.gz
