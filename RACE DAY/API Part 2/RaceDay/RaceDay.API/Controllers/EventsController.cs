@@ -74,12 +74,20 @@ public class EventsController : ControllerBase
         return NoContent();
     }
 
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin,Organiser,Organizer")]
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
         var ev = await _context.Events.FindAsync(id);
         if (ev == null) return NotFound();
+
+        if (!User.IsInRole("Admin"))
+        {
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (!int.TryParse(userIdClaim, out var userId) || ev.OrganiserID != userId)
+                return Forbid();
+        }
+
         _context.Events.Remove(ev);
         await _context.SaveChangesAsync();
         return NoContent();
