@@ -22,10 +22,11 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
     });
 
-// API HttpClient - your port is 7181 - GOOD
+// API HttpClient
 builder.Services.AddHttpClient("RaceDayAPI", client =>
 {
-    client.BaseAddress = new Uri("https://localhost:7181");
+    var apiBaseUrl = builder.Configuration["ApiBaseUrl"] ?? "https://localhost:7181";
+    client.BaseAddress = new Uri(apiBaseUrl);
 });
 
 // ALSO add generic HttpClient for EventsController that uses Factory
