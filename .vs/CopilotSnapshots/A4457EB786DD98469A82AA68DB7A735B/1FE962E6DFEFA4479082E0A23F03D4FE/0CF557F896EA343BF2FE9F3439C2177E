@@ -1,0 +1,42 @@
+﻿@model List<RaceDay.MVC.Models.EventViewModel>
+@{
+ ViewData["Title"]="Organiser Dashboard";
+ var upcoming = ViewBag.UpcomingEvents as List<RaceDay.MVC.Models.EventViewModel>;
+}
+<div style="background:#0a0a0a; min-height:100vh; padding:2rem;">
+  <div class="container">
+    <h1 style="color:white; font-weight:900; font-size:3rem;">DASHBOARD</h1>
+    <p style="color:#888;">Welcome Organiser — manage your races</p>
+
+    <div class="row g-3 mt-3">
+      <div class="col-md-4"><div style="background:#111; border:1px solid #222; border-radius:16px; padding:1.5rem;"><h3 style="color:#FF5A1F;">@ViewBag.TotalEvents</h3><p style="color:#aaa;">Total Events</p></div></div>
+      <div class="col-md-4"><div style="background:#111; border:1px solid #222; border-radius:16px; padding:1.5rem;"><h3 style="color:#C6FF00;">@upcoming?.Count</h3><p style="color:#aaa;">Upcoming</p></div></div>
+      <div class="col-md-4"><div style="background:#FF5A1F; border-radius:16px; padding:1.5rem;"><h3 style="color:black; font-weight:900;">+ NEW EVENT</h3><a href="/Organiser/Create" style="color:black; font-weight:700; text-decoration:none;">Create Now →</a></div></div>
+    </div>
+
+    <div class="mt-5">
+      <h4 style="color:white;">My Events</h4>
+      <div class="row g-3 mt-2">
+        @if(Model != null && Model.Any()){
+          @foreach(var ev in Model){
+            <div class="col-md-4">
+              <div style="background:#111; border-radius:16px; overflow:hidden; border:1px solid #222;">
+                <div style="height:140px; background:#222; display:flex; align-items:center; justify-content:center; color:#555;">@ev.EventType</div>
+                <div style="padding:1rem;">
+                  <h5 style="color:white;">@ev.Name</h5>
+                  <p style="color:#888; font-size:0.9rem;">@ev.Location • @ev.Date.ToString("dd MMM yyyy") • @ev.Distance KM</p>
+                  <div class="d-flex gap-2">
+                    <a href="/Organiser/Enrolments?eventId=@ev.Id" class="btn btn-sm" style="background:#C6FF00; color:black;">Enrolments</a>
+                    <form asp-action="Delete" method="post" style="display:inline;"><input type="hidden" name="id" value="@ev.Id"/><button class="btn btn-sm btn-outline-danger">Delete</button></form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          }
+        } else {
+          <p style="color:#666;">No events yet. Click Create Now.</p>
+        }
+      </div>
+    </div>
+  </div>
+</div>
